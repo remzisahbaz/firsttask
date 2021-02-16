@@ -104,7 +104,7 @@ export default class Project_List extends Component{
                             this.setState({
                                 projects:res.data,
                                 projectfriends:res.data[0].projectfriends,
-                                username:"",
+                                username:"REMZİ",
 
                                         })
                 })
@@ -199,9 +199,10 @@ export default class Project_List extends Component{
         <td>{res.content}</td>
         <td>{new Intl.DateTimeFormat('tr-TR').format(new Date(res.date))}</td> 
         <th><span class="badge rounded-pill bg-primary p-1" key={res.userid}>
-                    {console.log("user name"+this.state.username)}{this.GetUserAbout}
-   </span> </th>
-        <td>
+         {this.state.username}
+   </span> 
+   </th>
+        <td>{this.GetUserAbout(res.userid)}
         {/* {
             for (const element of array1) {console.log(res.projectfriends[this.state.sayac][0]);}
             
