@@ -87,10 +87,10 @@ class Project_Edit extends Component {
             </div>
 
             <div>
-            <label for="exampleFormControlFile1">Resim Seç</label>
+            <label htmlFor="exampleFormControlFile1">Resim Seç</label>
               <input 
               type="file" 
-              class="form-control-file" 
+              className="form-control-file" 
               id="exampleFormControlFile1"
             value={this.state.image}
             onChange={this.onChangeImage}
@@ -99,7 +99,7 @@ class Project_Edit extends Component {
             </div>
 
             <div className="m-1 mt-4">
-            <button type="submit" class="btn btn-success">Kaydet</button>
+            <button type="submit" className="btn btn-success">Kaydet</button>
             </div>
 
            </div>

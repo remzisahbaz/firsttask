@@ -146,9 +146,9 @@ class Project_Create extends Component{
                  
            </div>         
           
-     <div class="form-group">
-    <label for="exampleFormControlFile1">Resim Seç</label>
-    <input type="file" class="form-control-file" id="exampleFormControlFile1"
+     <div className="form-group">
+    <label htmlFor="exampleFormControlFile1">Resim Seç</label>
+    <input type="file" className="form-control-file" id="exampleFormControlFile1"
         value={this.state.image}
          onChange={this.onChangeImage}
 
@@ -158,7 +158,7 @@ class Project_Create extends Component{
             
 
            <div className="form-group">
-           <button type="submit" class="btn btn-success">Kaydet</button>
+           <button type="submit" className="btn btn-success">Kaydet</button>
                  
            </div>
 

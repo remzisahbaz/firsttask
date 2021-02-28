@@ -1,78 +1,12 @@
  import React,{Component} from "react";
 import {Link} from  "react-router-dom"
 import axios  from  "axios";
-import Dene from   '../components//Dene.js';
+import moment from "moment";
+import projectpagination from "../components/Project_list_pagination";
+//import Projectfriendsteam from "../components/Project_friend_team";
+import image1 from '../images/4.jpg';
 
-
-// export default class Project_List extends Component {
-//     contructor(props){
-//         // super(props);
-
-//                 this.ProjectDelete=this.ProjectDelete.bind(this);
-//                 this.projectList=this.projectList.bind(this);
-
-//               this.state={project:{
-//                 "_id": "6028f11cf310722420d74e49",
-//                 "title": "NEW PROJECT3_1",
-//                 "content": "first task",
-//                 "userid": "1",
-//                 "image": "//..////.//",
-//                 "date": "2019-12-31T21:00:00.000Z",
-//                 "createdAt": "2021-02-14T09:45:00.154Z",
-//                 "updatedAt": "2021-02-14T12:02:43.492Z",
-//                 "__v": 0
-//               }}
-        
-//     }
-
-//     componentDidMount(){
-//         axios.get('http://localhost:5000/projects/')
-//         .then(res=>{ 
-       
-//             this.setState({
-//                 project:res.data
-            
-//             })
-//             console.log(this.state.project)
-     
-          
-//         })
-//         .catch(err=>{
-//             console.log(err)
-//           })
-//     } 
-// //   projectList(){
-// //         this.state.projects.map(current_project=>
-// //             (
-// //           <Project
-// //            project={current_project} 
-// //               ProjectDelete={this.ProjectDelete} 
-// //                key={current_project._id}
-// //                />
-// //             )
-// //         )
-    
-// //     }
-        
-//     ProjectDelete(id){
-//         axios.delete('http:localhost:5000/projects/' + id)
-//         .then(res=>console.log(res.data));
-//         this.setState({
-//             project:this.state.project.filter(flt=>flt._id !==id)
-//         })
-//     }
-
-
-// const User= (props)=>{
-
-//     <span class="badge rounded-pill bg-secondary">
-//         {props.lastname}
-//     </span>
-
-// }
-           
-
-    
+//const Project_frdteam=React.createContext({});
    
 export default class Project_List extends Component{
 
@@ -86,7 +20,7 @@ export default class Project_List extends Component{
             this.ProjectDelete=this.ProjectDelete.bind(this);
             this.GetUserAbout=this.GetUserAbout.bind(this);
             this.GetProjectFriends=this.GetProjectFriends.bind(this);
-            this.deneme_=this.deneme_.bind(this);
+         
 
             this.state={
                 projects:[],
@@ -100,17 +34,13 @@ export default class Project_List extends Component{
                 componentDidMount(){
                 axios.get('http://localhost:5000/projects/')
                 .then(res=>{
-                             console.log(res.data[0].projectfriends);       
-                            this.setState({
+                                  this.setState({
                                 projects:res.data,
-                                projectfriends:res.data[0].projectfriends,
-                                username:"REMZİ",
+                                
 
-                                        })
+                  })
                 })
  
-
-
 
             }
 
@@ -122,56 +52,100 @@ export default class Project_List extends Component{
                     })
                    }
 
-            GetProjectFriends(items){ 
-               
-        //     this.state.items.map((userid)=>
-                
-        //             console.log(userid)
-                    
-        //             // axios.get('http://localhost:5000/user/'+userid)
-        //             // .then((user)=>
-        //             // GetUserAbout(user)
-        //         //    this.setState({
-        //         //    projectid:res.data.name
-        //         //     })
-        //            //)
-        //    )}
+            GetProjectFriends(user){ 
+                //this.setState({projectfriends:user})
             }
-
-
 
            GetUserAbout(userid){
       
-            axios.get('http://localhost:5000/user/'+userid)
+        axios.get('http://localhost:5000/user/'+userid)
         .then((user)=>
             this.setState({
                 username:user.name
          }))
 
            }
-           
-
-            deneme_(user){
-
-
-                <Dene ></Dene>
-                        
-
-                      
-
-                  }
-
-            
-
-           
-
-
-
+         
 
     render(){
+          const a=[];
     return (
            <div><h3>PROJELER SAYFASI</h3>
            
+
+           <div className="row row-cols-1 row-cols-md-3 g-3 p-0">
+          
+          {
+              this.state.projects.map(project=>{return(
+
+            <div className="col pb-5" key={project._id}>
+                <div className="card">
+                <img src={image1} className="card-img-top rounded" alt="..."/>
+                <div className="card-body p-1">
+                   
+                    <h2 className="cart-title badge  bg-primary  fs-1 text-white">
+                    <h3>{project.title}</h3>
+                    </h2>
+                    
+                   
+                    <h5 className="card-title"> <h6 className="fs-6">(Proje Lideri)</h6>
+                    <p className="badge  bg-secondary fs-1 text-white" >
+                    {this.GetUserAbout(project.userid)}{this.state.username}
+                        
+                    </p></h5>
+
+                    <h6 className="card-title">Takım Arkadaşları<br/>
+                    <h2 className="badge  bg-primary  fs-1 text-white">
+                    {/* {project.projectfriends.map(a=>(this.setState({projectfriends:a})))} */}
+                    {/* {this.setState({projectfriends:project.projectfriends})}
+                    {console.log(this.state.projectfriends)} */}
+                    {/* <Projectfriendsteam team={this.state.projectfriends}/> */}
+                    </h2></h6>
+
+                    <h6 className="card-title ">Proje Hakkında<br/>
+                    <div className="d-flex justify-content-start bg-info"  style={{ width:50}}>
+                    {project.content}
+                    </div></h6>
+                    
+                  
+
+
+                    <h6 className="card-title pb-0">Oluşturma Tarihi<br/>
+                    <h2 className="badge  bg-primary  fs-1 text-white" >
+                 
+                    {moment(project.date).format('d MMM YYYY')}
+                    </h2> </h6>
+
+                    <h5 className="card-title">
+                     <button type="button" className="btn btn-warning mr-1">
+                     Düzenle
+                     </button>
+                   
+                    <button type="button" className="btn btn-danger" >
+                    Sil
+                    </button>
+                     </h5>
+
+                   
+                         
+
+                </div>
+                </div>
+                </div>
+
+          )})}
+               
+                </div>
+
+
+
+
+
+
+
+
+
+
            <table className="table">
            <thead className="thead-light">
                <tr>
@@ -198,18 +172,15 @@ export default class Project_List extends Component{
         <td>{res.title}</td>
         <td>{res.content}</td>
         <td>{new Intl.DateTimeFormat('tr-TR').format(new Date(res.date))}</td> 
-        <th><span class="badge rounded-pill bg-primary p-1" key={res.userid}>
+        <th><span className="badge rounded-pill bg-primary p-1" key={res.userid}>
          {this.state.username}
    </span> 
    </th>
         <td>{this.GetUserAbout(res.userid)}
-        {/* {
-            for (const element of array1) {console.log(res.projectfriends[this.state.sayac][0]);}
-            
-            } */}
+       
        {this.state.projectfriends.map((user)=> {
            console.log(res.projectfriends[this.state.sayac])
-           return( <span class="badge rounded-pill bg-secondary p-1" key={user}>
+           return( <span className="badge rounded-pill bg-secondary p-1" key={user}>
       {res.projectfriends}
    </span> )})}
       
@@ -234,10 +205,15 @@ export default class Project_List extends Component{
 
            </tbody>
            </table>
+
+
+
+
+
+           <projectpagination />
             </div>
          )  
          }
 
 };
 
-// export default Project_List;

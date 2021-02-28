@@ -4,7 +4,7 @@ export default function dene(props) {
     return (
         <div>
             
-<span class="badge rounded-pill bg-secondary" key="00">
+<span className="badge rounded-pill bg-secondary" key="00">
       {this.props.takim}
    </span>
         </div>
